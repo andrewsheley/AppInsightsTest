@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using AppInsightsTest.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AppInsightsTest.Models;
 
 namespace AppInsightsTest
 {
@@ -34,9 +35,14 @@ namespace AppInsightsTest
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("appinsightstest"));
+
+            services.AddDbContext<EmployeeDbContext>(options => options.UseInMemoryDatabase("appinsightstest"));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 

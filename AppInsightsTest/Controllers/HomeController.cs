@@ -25,7 +25,7 @@ namespace AppInsightsTest.Controllers
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
-
+            System.Threading.Thread.Sleep(5000);
             return View();
         }
 
